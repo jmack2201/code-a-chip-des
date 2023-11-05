@@ -1,19 +1,47 @@
 `timescale 1ns/1ps
 module tb_des_top ();
     reg clk;
-    reg [63:0] key;
-    reg [63:0] text_input;
-    reg [63:0] scrambled_output;
+    reg [63:0] cipher_key;
+    reg [63:0] plain_text;
+    wire [63:0] cipher_text;
 
-    des_top des_top (.plain_text(text_input),.cipher_key(key),.cipher_text(scrambled_output));
+    reg [63:0] user_cipher_key;
+    reg [63:0] user_plain_text;
+
+    real clk_period;
+    parameter duty_cycle = 0.5;
+
+    reg [8*1000:0] testname;
+
+    integer check;
+
+    des_top des_top (.*);
+
 
     initial begin
-        key = 64'h0000000000000000;
-        text_input = 64'h0123456789abcdef;
-        $dumpfile("des_top.vcd");
-        $dumpvars;
-        #10
-        $finish;
+        forever begin
+            clk <= 1'b0;
+            #(clk_period - (clk_period * duty_cycle)) clk = 1'b1;
+            #(clk_period * duty_cycle);
+        end
     end
 
+    initial begin
+        $dumpfile("des_top.vcd");
+        $dumpvars;
+        check = $value$plusargs("test_name=%s",testname);
+        check = $value$plusargs("clk_period=%f",clk_period);
+        check = $value$plusargs("user_plain_text=%h",user_plain_text);
+        check = $value$plusargs("user_cipher_key=%h",user_cipher_key);
+        
+        case (testname)
+            "increase" : increase(); 
+            "user_input" : user_input(user_plain_text,user_cipher_key);
+            "reset" : reset();
+            default: reset();
+        endcase
+        $monitor("========================================\nTime: %d\nCLK: %d\tCipher Text: 64x%h\n========================================",$time,clk,cipher_text);
+        #10 $finish;
+    end
+    `include "des_top_tasks.v"
 endmodule
