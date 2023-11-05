@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module des_top (
     input [63:0] plain_text, //input plain text
     input [63:0] cipher_key, //assumes parity bits are not dropped

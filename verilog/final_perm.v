@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module final_perm (
     input [63:0] final_p_box_i,
     output [63:0] final_p_box_o 

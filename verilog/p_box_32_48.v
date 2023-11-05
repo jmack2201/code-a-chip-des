@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module p_box_32_48 (
     input [31:0] p_box_i,
     output [47:0] p_box_o 

@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module key_gen (
     input [63:0] init_key ,
     output [47:0] round_keys [0:15]

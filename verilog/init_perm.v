@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module init_perm (
     input [63:0] init_p_box_i,
     output [63:0] init_p_box_o 

@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module feistel_function (
     input [47:0] round_key,
     input [31:0] feistel_input,

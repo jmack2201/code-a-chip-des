@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module s_box_6_4 #(
     parameter s_number = 0
 )(
