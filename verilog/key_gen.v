@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 module key_gen (
     input [63:0] init_key ,
-    output [47:0] round_keys [0:15]
+    output [0:15][47:0] round_keys 
 );
 
     //drop the parity bits on input
@@ -64,7 +64,7 @@ module key_gen (
     assign permutated_key[1] = init_key[11];
     assign permutated_key[0] = init_key[3];
 
-    reg [55:0] key_gen_intermediate [0:16];
+    wire [55:0] key_gen_intermediate [0:16];
 
     genvar i;
     generate

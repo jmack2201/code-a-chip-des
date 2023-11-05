@@ -1,13 +1,13 @@
 `timescale 1ns/1ps
 module round_stack(
     input [63:0] init_perm_plain_text, //text coming out of the inital permutation
-    input [47:0] round_keys [0:15], //keys for each round
+    input [0:15][47:0] round_keys, //keys for each round
     output [63:0] plain_text_final_perm  //scrambed text going to final permuation
 );
 
 //modules to be created:
 //16 round modules all tied together
-reg [63:0] round_intermediate [0:15];
+wire [63:0] round_intermediate [0:15];
 
 genvar i;
 generate

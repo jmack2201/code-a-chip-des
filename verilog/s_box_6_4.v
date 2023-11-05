@@ -7,7 +7,7 @@ module s_box_6_4 #(
 );
     //get row and column
     wire [1:0] row;
-    reg [3:0] column;
+    wire [3:0] column;
 
     assign row[1] = s_box_6_4_i[5];
     assign row[0] = s_box_6_4_i[0];

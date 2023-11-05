@@ -6,12 +6,12 @@ module des_top (
 );
 
     reg [63:0] text_i;
-    reg [63:0] init_perm_out;
-    reg [63:0] final_perm_in;
+    wire [63:0] init_perm_out;
+    wire [63:0] final_perm_in;
 
     init_perm init_perm (.init_p_box_i(plain_text), .init_p_box_o(init_perm_out));
 
-    reg [47:0] round_keys_output [15:0];
+    wire [15:0][47:0] round_keys_output;
 
     key_gen key_gen(.init_key(cipher_key), .round_keys(round_keys_output));
 

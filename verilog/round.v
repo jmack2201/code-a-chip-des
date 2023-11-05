@@ -18,7 +18,7 @@ wire [31:0] round_right_end;
 assign round_left_start = round_64_i[63:32];
 assign round_right_start = round_64_i[31:0];
 
-reg [31:0] feistel_out;
+wire [31:0] feistel_out;
 
 feistel_function feistel_function (.feistel_input(round_right_start),.feistel_output(feistel_out),.round_key(round_key));
 
