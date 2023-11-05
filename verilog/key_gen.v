@@ -64,15 +64,13 @@ module key_gen (
     assign permutated_key[1] = init_key[11];
     assign permutated_key[0] = init_key[3];
 
-    wire [55:0] key_gen_intermediate [0:16];
+    wire [55:0] key_gen_intermediate [0:15];
 
     genvar i;
     generate
         for (i = 0; i < 16 ;i=i+1 ) begin : gen_round_key
             if (i == 0) begin
                 round_key_gen #(.round_num(i)) round_key_gen_stage (.key_input(permutated_key), .key_output(key_gen_intermediate[i]), .round_key_out(round_keys[i]));
-            end else if (i==15) begin
-                round_key_gen #(.round_num(i)) round_key_gen_stage (.key_input(key_gen_intermediate[i]), .key_output(key_gen_intermediate[i+1]), .round_key_out(round_keys[i]));
             end else begin
                 round_key_gen #(.round_num(i)) round_key_gen_stage (.key_input(key_gen_intermediate[i-1]), .key_output(key_gen_intermediate[i]), .round_key_out(round_keys[i]));    
             end
