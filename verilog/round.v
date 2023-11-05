@@ -8,16 +8,16 @@ module round (
 //feistel function
 
 //create left and right
-logic [31:0] round_left_start;
-logic [31:0] round_right_start;
+wire [31:0] round_left_start;
+wire [31:0] round_right_start;
 
-logic [31:0] round_left_end;
-logic [31:0] round_right_end;
+wire [31:0] round_left_end;
+wire [31:0] round_right_end;
 
 assign round_left_start = round_64_i[63:32];
 assign round_right_start = round_64_i[31:0];
 
-logic [31:0] feistel_out;
+reg [31:0] feistel_out;
 
 feistel_function feistel_function (.feistel_input(round_right_start),.feistel_output(feistel_out),.round_key(round_key));
 

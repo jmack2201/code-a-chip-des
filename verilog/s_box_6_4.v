@@ -5,15 +5,15 @@ module s_box_6_4 #(
     output [3:0] s_box_6_4_o 
 );
     //get row and column
-    logic [1:0] row;
-    logic [3:0] column;
+    wire [1:0] row;
+    reg [3:0] column;
 
     assign row[1] = s_box_6_4_i[5];
     assign row[0] = s_box_6_4_i[0];
     assign column = s_box_6_4_i[4:1];
 
-    logic [63:0] s_box_lut [0:3];
-    logic [63:0] s_box_6_4_o_row;
+    reg [63:0] s_box_lut [0:3];
+    wire [63:0] s_box_6_4_o_row;
     //based on what s number, we have a different LUT
     always @(s_box_6_4_i) begin : s_box
         case (s_number)
@@ -75,7 +75,7 @@ module s_box_6_4 #(
     end
     //we just access the LUT to get the value
     assign s_box_6_4_o_row = s_box_lut[row]; //make this work
-    logic [3:0] out;
+    reg [3:0] out;
     always @(s_box_6_4_o_row) begin
         case (column)
             0: out = s_box_6_4_o_row[3:0];

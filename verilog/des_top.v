@@ -4,13 +4,13 @@ module des_top (
     output [63:0] cipher_text //final scrambled text
 );
 
-    logic [63:0] text_i;
-    logic [63:0] init_perm_out;
-    logic [63:0] final_perm_in;
+    reg [63:0] text_i;
+    reg [63:0] init_perm_out;
+    reg [63:0] final_perm_in;
 
     init_perm init_perm (.init_p_box_i(plain_text), .init_p_box_o(init_perm_out));
 
-    logic [47:0] round_keys_output [15:0];
+    reg [47:0] round_keys_output [15:0];
 
     key_gen key_gen(.init_key(cipher_key), .round_keys(round_keys_output));
 

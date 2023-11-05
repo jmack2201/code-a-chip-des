@@ -6,7 +6,7 @@ module round_stack(
 
 //modules to be created:
 //16 round modules all tied together
-logic [63:0] round_intermediate [0:15];
+reg [63:0] round_intermediate [0:15];
 
 genvar i;
 generate

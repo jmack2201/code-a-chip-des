@@ -6,11 +6,11 @@ module round_key_gen #(
     output [55:0] key_output 
 );
 
-    logic [27:0] input_key_left_shifted;
-    logic [27:0] input_key_right_shifted;
-    logic [55:0] input_key_combined;
-    logic left_MSB;
-    logic right_MSB;
+    reg [27:0] input_key_left_shifted;
+    reg [27:0] input_key_right_shifted;
+    reg [55:0] input_key_combined;
+    reg left_MSB;
+    reg right_MSB;
 
     always @(*) begin
         input_key_left_shifted=key_input[55:28];

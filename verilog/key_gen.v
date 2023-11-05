@@ -4,7 +4,7 @@ module key_gen (
 );
 
     //drop the parity bits on input
-    logic [55:0] permutated_key;
+    wire [55:0] permutated_key;
 
     assign permutated_key[55] = init_key[56];
     assign permutated_key[54] = init_key[48];
@@ -63,7 +63,7 @@ module key_gen (
     assign permutated_key[1] = init_key[11];
     assign permutated_key[0] = init_key[3];
 
-    logic [55:0] key_gen_intermediate [0:16];
+    reg [55:0] key_gen_intermediate [0:16];
 
     genvar i;
     generate
