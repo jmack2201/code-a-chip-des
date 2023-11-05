@@ -1,0 +1,15 @@
+feistel_function.sv
+final_perm.sv
+init_perm.sv
+key_gen.sv
+p_box_32_32.sv
+p_box_32_48.sv
+p_box_56_48.sv
+round_key_gen.sv
+round_stack.sv
+round.sv
+s_box_6_4.sv
+s_box_48_32.sv
+des_top.sv
+tb_des_top.sv
++timescale+1ns/1ps
