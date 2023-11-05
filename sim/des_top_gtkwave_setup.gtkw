@@ -1,0 +1,26 @@
+[*]
+[*] GTKWave Analyzer v3.3.114 (w)1999-2023 BSI
+[*] Sun Nov  5 21:08:55 2023
+[*]
+[dumpfile] "/home/jmack2201/code-a-chip-des/sim/des_top.vcd"
+[dumpfile_mtime] "Sun Nov  5 21:08:00 2023"
+[dumpfile_size] 99540
+[savefile] "/home/jmack2201/code-a-chip-des/sim/des_top_gtkwave_setup.gtkw"
+[timestart] 0
+[size] 1000 600
+[pos] -1 -1
+*0.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 192
+[signals_width] 132
+[sst_expanded] 1
+[sst_vpaned_height] 157
+@820
+tb_des_top.testname[8000:0]
+@28
+tb_des_top.clk
+@22
+tb_des_top.plain_text[63:0]
+tb_des_top.cipher_key[63:0]
+tb_des_top.cipher_text[63:0]
+[pattern_trace] 1
+[pattern_trace] 0
