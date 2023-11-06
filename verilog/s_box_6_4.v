@@ -75,26 +75,26 @@ module s_box_6_4 #(
     endcase
     end
     //we just access the LUT to get the value
-    assign s_box_6_4_o_row = s_box_lut[row]; //make this work
+    assign s_box_6_4_o_row = s_box_lut[row];
     reg [3:0] out;
     always @(s_box_6_4_o_row) begin
         case (column)
-            0: out = s_box_6_4_o_row[3:0];
-            1: out = s_box_6_4_o_row[7:4];
-            2: out = s_box_6_4_o_row[11:8];
-            3: out = s_box_6_4_o_row[15:12];
-            4: out = s_box_6_4_o_row[19:16];
-            5: out = s_box_6_4_o_row[23:20];
-            6: out = s_box_6_4_o_row[27:24];
-            7: out = s_box_6_4_o_row[31:28];
-            8: out = s_box_6_4_o_row[35:32];
-            9: out = s_box_6_4_o_row[39:36];
-            10: out = s_box_6_4_o_row[43:40];
-            11: out = s_box_6_4_o_row[47:44];
-            12: out = s_box_6_4_o_row[51:48];
-            13: out = s_box_6_4_o_row[55:52];
-            14: out = s_box_6_4_o_row[59:56];
-            15: out = s_box_6_4_o_row[63:60];
+            15: out = s_box_6_4_o_row[3:0];
+            14: out = s_box_6_4_o_row[7:4];
+            13: out = s_box_6_4_o_row[11:8];
+            12: out = s_box_6_4_o_row[15:12];
+            11: out = s_box_6_4_o_row[19:16];
+            10: out = s_box_6_4_o_row[23:20];
+            9: out = s_box_6_4_o_row[27:24];
+            8: out = s_box_6_4_o_row[31:28];
+            7: out = s_box_6_4_o_row[35:32];
+            6: out = s_box_6_4_o_row[39:36];
+            5: out = s_box_6_4_o_row[43:40];
+            4: out = s_box_6_4_o_row[47:44];
+            3: out = s_box_6_4_o_row[51:48];
+            2: out = s_box_6_4_o_row[55:52];
+            1: out = s_box_6_4_o_row[59:56];
+            0: out = s_box_6_4_o_row[63:60];
         endcase
     end
     assign s_box_6_4_o = out;
