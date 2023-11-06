@@ -7,16 +7,6 @@ using namespace std;
 string round_keys[16];
 // String to hold the plain text
 string pt;
-
-string reverseString(string str) {
-    string reversedStr;
-    for (int i = str.length() - 1; i >= 0; i--) {
-        reversedStr += str[i];
-    }
-    return reversedStr;
-}
-
-
 // Function to convert a number in decimal to binary
 string convertDecimalToBinary(int decimal)
 {
