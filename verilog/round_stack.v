@@ -20,6 +20,6 @@ generate
     end
 endgenerate
 
-assign plain_text_final_perm = round_intermediate[15]; 
+assign plain_text_final_perm = {round_intermediate[15][31:0], round_intermediate[15][63:32]}; 
 
 endmodule
