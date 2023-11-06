@@ -10,21 +10,22 @@ module round_key_gen #(
     reg [27:0] input_key_left_shifted;
     reg [27:0] input_key_right_shifted;
     reg [55:0] input_key_combined;
+    reg [27:0] input_key_left, input_key_right;
     always @(*) begin
-        input_key_left_shifted=key_input[55:28];
-        input_key_right_shifted=key_input[27:0];
+        input_key_left=key_input[55:28];
+        input_key_right=key_input[27:0];
         case (round_num)
             0,1,8,15:begin  //shift once
-                input_key_left_shifted = {input_key_right_shifted[26:0],input_key_right_shifted[27]};
-                input_key_right_shifted = {input_key_right_shifted[26:0],input_key_right_shifted[27]};
+                input_key_left_shifted = {input_key_left[26:0],input_key_left[27]};
+                input_key_right_shifted = {input_key_right[26:0],input_key_right[27]};
             end 
             2,3,4,5,6,7,9,10,11,12,13,14:begin //shift twice
-                input_key_left_shifted = {input_key_right_shifted[25:0],input_key_right_shifted[27:26]};
-                input_key_right_shifted = {input_key_right_shifted[25:0],input_key_right_shifted[27:26]};
+                input_key_left_shifted = {input_key_left[25:0],input_key_left[27:26]};
+                input_key_right_shifted = {input_key_right[25:0],input_key_right[27:26]};
             end
             default: begin //shift twice
-                input_key_left_shifted = {input_key_right_shifted[25:0],input_key_right_shifted[27:26]};
-                input_key_right_shifted = {input_key_right_shifted[25:0],input_key_right_shifted[27:26]};
+                input_key_left_shifted = {input_key_left[25:0],input_key_left[27:26]};
+                input_key_right_shifted = {input_key_right[25:0],input_key_right[27:26]};
             end
         endcase
         input_key_combined[55:28] = input_key_left_shifted;
