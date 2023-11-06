@@ -1,0 +1,62 @@
+`timescale 1ns/1ps
+module p_box_64_56 (
+    input [1:64] p_box_64_56_i,
+    output [1:56] p_box_64_56_o 
+);
+    assign p_box_64_56_o[1] = p_box_64_56_i[57];
+    assign p_box_64_56_o[2] = p_box_64_56_i[49];
+    assign p_box_64_56_o[3] = p_box_64_56_i[41];
+    assign p_box_64_56_o[4] = p_box_64_56_i[33];
+    assign p_box_64_56_o[5] = p_box_64_56_i[25];
+    assign p_box_64_56_o[6] = p_box_64_56_i[17];
+    assign p_box_64_56_o[7] = p_box_64_56_i[9];
+    assign p_box_64_56_o[8] = p_box_64_56_i[1];
+    assign p_box_64_56_o[9] = p_box_64_56_i[58];
+    assign p_box_64_56_o[10] = p_box_64_56_i[50];
+    assign p_box_64_56_o[11] = p_box_64_56_i[42];
+    assign p_box_64_56_o[12] = p_box_64_56_i[34];
+    assign p_box_64_56_o[13] = p_box_64_56_i[26];
+    assign p_box_64_56_o[14] = p_box_64_56_i[18];
+    assign p_box_64_56_o[15] = p_box_64_56_i[10];
+    assign p_box_64_56_o[16] = p_box_64_56_i[2];
+    assign p_box_64_56_o[17] = p_box_64_56_i[59];
+    assign p_box_64_56_o[18] = p_box_64_56_i[51];
+    assign p_box_64_56_o[19] = p_box_64_56_i[43];
+    assign p_box_64_56_o[20] = p_box_64_56_i[35];
+    assign p_box_64_56_o[21] = p_box_64_56_i[27];
+    assign p_box_64_56_o[22] = p_box_64_56_i[19];
+    assign p_box_64_56_o[23] = p_box_64_56_i[11];
+    assign p_box_64_56_o[24] = p_box_64_56_i[3];
+    assign p_box_64_56_o[25] = p_box_64_56_i[60];
+    assign p_box_64_56_o[26] = p_box_64_56_i[52];
+    assign p_box_64_56_o[27] = p_box_64_56_i[44];
+    assign p_box_64_56_o[28] = p_box_64_56_i[36];
+    assign p_box_64_56_o[29] = p_box_64_56_i[63];
+    assign p_box_64_56_o[30] = p_box_64_56_i[55];
+    assign p_box_64_56_o[31] = p_box_64_56_i[47];
+    assign p_box_64_56_o[32] = p_box_64_56_i[39];
+    assign p_box_64_56_o[33] = p_box_64_56_i[31];
+    assign p_box_64_56_o[34] = p_box_64_56_i[23];
+    assign p_box_64_56_o[35] = p_box_64_56_i[15];
+    assign p_box_64_56_o[36] = p_box_64_56_i[7];
+    assign p_box_64_56_o[37] = p_box_64_56_i[62];
+    assign p_box_64_56_o[38] = p_box_64_56_i[54];
+    assign p_box_64_56_o[39] = p_box_64_56_i[46];
+    assign p_box_64_56_o[40] = p_box_64_56_i[38];
+    assign p_box_64_56_o[41] = p_box_64_56_i[30];
+    assign p_box_64_56_o[42] = p_box_64_56_i[22];
+    assign p_box_64_56_o[43] = p_box_64_56_i[14];
+    assign p_box_64_56_o[44] = p_box_64_56_i[6];
+    assign p_box_64_56_o[45] = p_box_64_56_i[61];
+    assign p_box_64_56_o[46] = p_box_64_56_i[53];
+    assign p_box_64_56_o[47] = p_box_64_56_i[45];
+    assign p_box_64_56_o[48] = p_box_64_56_i[37];
+    assign p_box_64_56_o[49] = p_box_64_56_i[29];
+    assign p_box_64_56_o[50] = p_box_64_56_i[21];
+    assign p_box_64_56_o[51] = p_box_64_56_i[13];
+    assign p_box_64_56_o[52] = p_box_64_56_i[5];
+    assign p_box_64_56_o[53] = p_box_64_56_i[28];
+    assign p_box_64_56_o[54] = p_box_64_56_i[20];
+    assign p_box_64_56_o[55] = p_box_64_56_i[12];
+    assign p_box_64_56_o[56] = p_box_64_56_i[4];
+endmodule
