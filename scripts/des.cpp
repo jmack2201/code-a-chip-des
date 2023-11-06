@@ -7,6 +7,16 @@ using namespace std;
 string round_keys[16];
 // String to hold the plain text
 string pt;
+
+string reverseString(string str) {
+    string reversedStr;
+    for (int i = str.length() - 1; i >= 0; i--) {
+        reversedStr += str[i];
+    }
+    return reversedStr;
+}
+
+
 // Function to convert a number in decimal to binary
 string convertDecimalToBinary(int decimal)
 {
@@ -71,6 +81,19 @@ string Xor(string a, string b){
 	} 
 	return result; 
 } 
+
+string convertBinaryToHexadecimal(string binary){
+	string hexDigits = "0123456789ABCDEF";
+    string hexResult = "";
+
+    // Convert each 4-bit chunk to a hexadecimal digit
+    for (size_t i = 0; i < binary.size(); i += 4) {
+        string chunk = binary.substr(i, 4);
+        int decimal = stoi(chunk, nullptr, 2);
+        hexResult += hexDigits[decimal];
+    }
+	return hexResult;
+}
 // Function to generate the 16 keys.
 void generate_keys(string key){
 	// The PC1 table
@@ -275,13 +298,13 @@ string DES(){
 }
 int main(){ 
 	// A 64 bit key
-	string key= "1111111011011100101110101001100001110110010101000011001000010000";
+	string key= "0001001100110100010101110111100110011011101111001101111111110001";
 	// A block of plain text of 64 bits
 	pt= "0000000100100011010001010110011110001001101010111100110111101111";
 	// Calling the function to generate 16 keys
   	generate_keys(key); 
-    cout<<"Plain text: "<<pt<<endl; 
+    cout<<"Plain text: "<<convertBinaryToHexadecimal(pt)<<endl; 
 	// Applying the algo
     string ct= DES(); 
-    cout<<"Ciphertext: "<<ct<<endl;
+    cout<<"Ciphertext: "<<convertBinaryToHexadecimal(ct)<<endl;
 } 
