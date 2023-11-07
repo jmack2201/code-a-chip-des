@@ -292,9 +292,28 @@ int main(){
 	// A block of plain text of 64 bits
 	pt= "0000000100100011010001010110011110001001101010111100110111101111";
 	// Calling the function to generate 16 keys
+	string apt = pt;
   	generate_keys(key); 
     cout<<"Plain text: "<<convertBinaryToHexadecimal(pt)<<endl; 
 	// Applying the algo
     string ct= DES(); 
     cout<<"Ciphertext: "<<convertBinaryToHexadecimal(ct)<<endl;
+	// Reversing the round_keys array for decryption
+	int i = 15;
+	int j = 0;
+	while(i > j)
+	{
+		string temp = round_keys[i];
+		round_keys[i] = round_keys[j];
+		round_keys[j] = temp;
+		i--;
+		j++;
+	}
+	pt = ct;
+	string decrypted = DES();
+	cout<<"Decrypted text:"<<convertBinaryToHexadecimal(decrypted)<<endl;
+	// Comapring the initial plain text with the decrypted text
+	if (decrypted == apt){
+		cout<<"Plain text encrypted and decrypted successfully."<<endl;
+	}
 } 
