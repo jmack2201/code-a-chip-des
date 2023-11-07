@@ -2,6 +2,7 @@
 module des_top (
     input [63:0] plain_text, //input plain text
     input [63:0] cipher_key, //assumes parity bits are not dropped
+    input encrypt_decrypt, //whether 0 for encryption and 1 for decryption
     output [63:0] cipher_text //final scrambled text
 );
 
@@ -13,7 +14,7 @@ module des_top (
 
     wire [15:0][47:0] round_keys_output;
 
-    key_gen key_gen(.init_key(cipher_key), .round_keys(round_keys_output));
+    key_gen key_gen(.init_key(cipher_key), .round_keys(round_keys_output), .encrypt_decrypt(encrypt_decrypt));
 
     round_stack round_stack (.init_perm_plain_text(init_perm_out), .round_keys(round_keys_output), .plain_text_final_perm(final_perm_in));
 

@@ -1,6 +1,7 @@
 feistel_function.v
 final_perm.v
 init_perm.v
+key_mux.v
 key_gen.v
 p_box_32_32.v
 p_box_32_48.v

@@ -3,6 +3,7 @@ module tb_des_top ();
     reg clk;
     reg [63:0] cipher_key;
     reg [63:0] plain_text;
+    reg encrypt_decrypt;
     wire [63:0] cipher_text;
 
     reg [63:0] user_cipher_key;
@@ -16,7 +17,6 @@ module tb_des_top ();
     integer check;
 
     des_top des_top (.*);
-
 
     initial begin
         forever begin
@@ -33,6 +33,7 @@ module tb_des_top ();
         check = $value$plusargs("clk_period=%f",clk_period);
         check = $value$plusargs("user_plain_text=%h",user_plain_text);
         check = $value$plusargs("user_cipher_key=%h",user_cipher_key);
+        check = $value$plusargs("encrypt_decrypt=%b",encrypt_decrypt);
         
         case (testname)
             "increase" : increase(); 
