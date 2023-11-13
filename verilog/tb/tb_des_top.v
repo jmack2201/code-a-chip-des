@@ -5,6 +5,9 @@ module tb_des_top ();
     reg [63:0] plain_text;
     reg encrypt_decrypt;
     wire [63:0] cipher_text;
+    reg rstn;
+    reg valid_in;
+    wire valid_out;
 
     reg [63:0] user_cipher_key;
     reg [63:0] user_plain_text;
@@ -36,13 +39,12 @@ module tb_des_top ();
         check = $value$plusargs("encrypt_decrypt=%b",encrypt_decrypt);
         
         case (testname)
-            "increase" : increase(); 
             "user_input" : user_input(user_plain_text,user_cipher_key);
             "reset" : reset();
             default: reset();
         endcase
         $monitor("========================================\nTime: %d\nCLK: %d\tCipher Text: 64x%h\n========================================",$time,clk,cipher_text);
-        #10 $finish;
+        #100 $finish;
     end
     `include "des_top_tasks.v"
 endmodule
