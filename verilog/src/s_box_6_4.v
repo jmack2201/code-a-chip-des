@@ -94,6 +94,7 @@ module s_box_6_4 #(
             2: out = s_box_6_4_o_row[55:52];
             1: out = s_box_6_4_o_row[59:56];
             0: out = s_box_6_4_o_row[63:60];
+            default: out = s_box_6_4_o_row[63:60];
         endcase
     end
     assign s_box_6_4_o = out;
