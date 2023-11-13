@@ -1,4 +1,3 @@
-`timescale 1ns/1ps
 module round_key_gen #(
     parameter round_num=0
 ) (

@@ -1,4 +1,3 @@
-`timescale 1ns/1ps
 module round (
     input [63:0] round_64_i,
     input [47:0] round_key,

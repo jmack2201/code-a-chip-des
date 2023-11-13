@@ -1,4 +1,3 @@
-`timescale 1ns/1ps
 module key_gen (
     input [63:0] init_key,
     input encrypt_decrypt,

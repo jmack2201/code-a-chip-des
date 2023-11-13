@@ -1,4 +1,3 @@
-`timescale 1ns/1ps
 module round_stack(
     input [63:0] init_perm_plain_text, //text coming out of the inital permutation
     input [0:15][47:0] round_keys, //keys for each round

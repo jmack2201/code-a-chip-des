@@ -1,4 +1,3 @@
-`timescale 1ns/1ps
 module key_mux (
     input encrypt_decrypt,
     input [0:15][47:0] round_keys_i,
