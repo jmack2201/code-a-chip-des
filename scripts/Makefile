@@ -1,5 +1,6 @@
 design_name=des_top
-verilog_source=../verilog/
+verilog_source=../verilog/src/
+tb_source=../verilog/tb/
 cpp_object_name=des
 
 .DEFAULT: verilog
@@ -21,3 +22,4 @@ clean:
 	rm -rf $(design_name)
 link:
 	ln -f -s $(verilog_source)*.v .
+	ln -f -s $(tb_source)*.v .
