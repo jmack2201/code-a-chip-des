@@ -1,6 +1,6 @@
 module round_stack(
     input [63:0] init_perm_plain_text, //text coming out of the inital permutation
-    input [0:15][47:0] round_keys, //keys for each round
+    input [767:0] round_keys, //keys for each round
     output [63:0] plain_text_final_perm  //scrambed text going to final permuation
 );
 
@@ -12,9 +12,9 @@ genvar i;
 generate
     for (i = 0; i < 16; i=i+1) begin : gen_round_stage
         if (i == 0) begin
-            round round_stage (.round_64_i(init_perm_plain_text), .round_64_o(round_intermediate[i]), .round_key(round_keys[i]));
+            round round_stage (.round_64_i(init_perm_plain_text), .round_64_o(round_intermediate[i]), .round_key(round_keys[767-48*i:720-48*i]));
         end else begin
-            round round_stage (.round_64_i(round_intermediate[i-1]), .round_64_o(round_intermediate[i]), .round_key(round_keys[i]));
+            round round_stage (.round_64_i(round_intermediate[i-1]), .round_64_o(round_intermediate[i]), .round_key(round_keys[767-48*i:720-48*i]));
         end
     end
 endgenerate
