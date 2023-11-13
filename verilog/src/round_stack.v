@@ -11,7 +11,7 @@ wire [63:0] round_intermediate [0:15];
 
 genvar i;
 generate
-    for (i = 0; i < 16; i=i+1) begin
+    for (i = 0; i < 16; i=i+1) begin : gen_round_stage
         if (i == 0) begin
             round round_stage (.round_64_i(init_perm_plain_text), .round_64_o(round_intermediate[i]), .round_key(round_keys[i]));
         end else begin
