@@ -15,7 +15,7 @@ module des_top (
 
     key_gen key_gen(.init_key(cipher_key), .round_keys(round_keys_output), .encrypt_decrypt(encrypt_decrypt));
 
-    round_stack round_stack (.init_perm_plain_text(init_perm_out), .round_keys(round_keys_output), .encrypt_decrypt(encrypt_decrypt), .plain_text_final_perm(final_perm_in));
+    round_stack round_stack (.init_perm_plain_text(init_perm_out), .round_keys(round_keys_output), .plain_text_final_perm(final_perm_in));
 
     final_perm final_perm (.final_p_box_i(final_perm_in), .final_p_box_o(cipher_text));
     
