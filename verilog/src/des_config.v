@@ -1,0 +1,1 @@
+`define NUM_ROUND_STAGES = 8
