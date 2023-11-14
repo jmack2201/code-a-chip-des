@@ -29,9 +29,10 @@ task display_inputs;
     input [63:0] plain_text;
     input [63:0] cipher_key;
     begin
-        $display("========================================");
+        $display("====================================================");
         $display("Inputs to DES:");
         $display("\tPlain Text: 64x%h",plain_text);
         $display("\tCipher Key: 64x%h",cipher_key);
+        $display("\tEncrypt/Decrypt: %d",encrypt_decrypt);
     end
 endtask

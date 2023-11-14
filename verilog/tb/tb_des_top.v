@@ -37,14 +37,14 @@ module tb_des_top ();
         check = $value$plusargs("user_plain_text=%h",user_plain_text);
         check = $value$plusargs("user_cipher_key=%h",user_cipher_key);
         check = $value$plusargs("encrypt_decrypt=%b",encrypt_decrypt);
-        
+
         case (testname)
             "user_input" : user_input(user_plain_text,user_cipher_key);
             "reset" : reset();
             default: reset();
         endcase
-        $monitor("========================================\nTime: %d\nCLK: %d\tCipher Text: 64x%h\n========================================",$time,clk,cipher_text);
-        #100 $finish;
+        $monitor("====================================================\nTime: %d\nCLK: %d\tCipher Text: 64x%h Valid: %d",$time,clk,cipher_text,valid_out);
+        #50 $finish;
     end
     `include "des_top_tasks.v"
 endmodule
