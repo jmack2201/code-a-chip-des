@@ -2,7 +2,7 @@ module s_box_6_4 #(
     parameter s_number = 0
 )(
     input [5:0] s_box_6_4_i,
-    output [3:0] s_box_6_4_o 
+    output reg [3:0] s_box_6_4_o 
 );
     //get row and column
     wire [1:0] row;
@@ -75,27 +75,25 @@ module s_box_6_4 #(
     end
     //we just access the LUT to get the value
     assign s_box_6_4_o_row = s_box_lut[row];
-    reg [3:0] out;
-    always @(s_box_6_4_o_row) begin
+    always @(*) begin
         case (column)
-            15: out = s_box_6_4_o_row[3:0];
-            14: out = s_box_6_4_o_row[7:4];
-            13: out = s_box_6_4_o_row[11:8];
-            12: out = s_box_6_4_o_row[15:12];
-            11: out = s_box_6_4_o_row[19:16];
-            10: out = s_box_6_4_o_row[23:20];
-            9: out = s_box_6_4_o_row[27:24];
-            8: out = s_box_6_4_o_row[31:28];
-            7: out = s_box_6_4_o_row[35:32];
-            6: out = s_box_6_4_o_row[39:36];
-            5: out = s_box_6_4_o_row[43:40];
-            4: out = s_box_6_4_o_row[47:44];
-            3: out = s_box_6_4_o_row[51:48];
-            2: out = s_box_6_4_o_row[55:52];
-            1: out = s_box_6_4_o_row[59:56];
-            0: out = s_box_6_4_o_row[63:60];
-            default: out = s_box_6_4_o_row[63:60];
+            4'hf: s_box_6_4_o = s_box_6_4_o_row[3:0];
+            4'he: s_box_6_4_o = s_box_6_4_o_row[7:4];
+            4'hd: s_box_6_4_o = s_box_6_4_o_row[11:8];
+            4'hc: s_box_6_4_o = s_box_6_4_o_row[15:12];
+            4'hb: s_box_6_4_o = s_box_6_4_o_row[19:16];
+            4'ha: s_box_6_4_o = s_box_6_4_o_row[23:20];
+            4'h9: s_box_6_4_o = s_box_6_4_o_row[27:24];
+            4'h8: s_box_6_4_o = s_box_6_4_o_row[31:28];
+            4'h7: s_box_6_4_o = s_box_6_4_o_row[35:32];
+            4'h6: s_box_6_4_o = s_box_6_4_o_row[39:36];
+            4'h5: s_box_6_4_o = s_box_6_4_o_row[43:40];
+            4'h4: s_box_6_4_o = s_box_6_4_o_row[47:44];
+            4'h3: s_box_6_4_o = s_box_6_4_o_row[51:48];
+            4'h2: s_box_6_4_o = s_box_6_4_o_row[55:52];
+            4'h1: s_box_6_4_o = s_box_6_4_o_row[59:56];
+            4'h0: s_box_6_4_o = s_box_6_4_o_row[63:60];
+            default: s_box_6_4_o = s_box_6_4_o_row[63:60];
         endcase
     end
-    assign s_box_6_4_o = out;
 endmodule
