@@ -35,6 +35,40 @@ int convertBinaryToDecimal(string binary)
 	}
 	return decimal;
 }
+string convertBinaryToHexadecimal(string binary){
+	string hexDigits = "0123456789ABCDEF";
+    string hexResult = "";
+
+    // Convert each 4-bit chunk to a hexadecimal digit
+    for (size_t i = 0; i < binary.size(); i += 4) {
+        string chunk = binary.substr(i, 4);
+        int decimal = stoi(chunk, nullptr, 2);
+        hexResult += hexDigits[decimal];
+    }
+	return hexResult;
+}
+string convertHexadecimalToBinary(string hex) {
+    // Define a lookup table for hexadecimal to binary conversion
+    string hexDigits = "0123456789ABCDEF";
+    string binaryDigits[] = {"0000", "0001", "0010", "0011",
+                                        "0100", "0101", "0110", "0111",
+                                        "1000", "1001", "1010", "1011",
+                                        "1100", "1101", "1110", "1111"};
+    // Convert each hexadecimal digit to its binary representation
+    string binaryResult;
+    for (char c : hex) {
+        // Find the index of the hexadecimal digit in the lookup table
+        size_t index = hexDigits.find(toupper(c));
+        if (index != string::npos) {
+            binaryResult += binaryDigits[index];
+        } else {
+            // Handle invalid characters in the hexadecimal string
+            cerr << "Error: Invalid hexadecimal character '" << c << "'" << endl;
+            return "";
+        }
+    }
+    return binaryResult;
+}
 // Function to do a circular left shift by 1
 string shift_left_once(string key_chunk){ 
     string shifted="";  
@@ -72,18 +106,6 @@ string Xor(string a, string b){
 	return result; 
 } 
 
-string convertBinaryToHexadecimal(string binary){
-	string hexDigits = "0123456789ABCDEF";
-    string hexResult = "";
-
-    // Convert each 4-bit chunk to a hexadecimal digit
-    for (size_t i = 0; i < binary.size(); i += 4) {
-        string chunk = binary.substr(i, 4);
-        int decimal = stoi(chunk, nullptr, 2);
-        hexResult += hexDigits[decimal];
-    }
-	return hexResult;
-}
 // Function to generate the 16 keys.
 void generate_keys(string key){
 	// The PC1 table
@@ -329,12 +351,13 @@ string DES(){
 	return ciphertext; 
 }
 
-int main(){ 
+int main(int argc, char *argv[]){ 
 	// A 64 bit key
-	string key= "0001001100110100010101110111100110011011101111001101111111110001";
+	string key= convertHexadecimalToBinary(argv[1]);
 	// A block of plain text of 64 bits
-	pt= "0000000100100011010001010110011110001001101010111100110111101111";
+	pt= convertHexadecimalToBinary(argv[2]);
 	// Calling the function to generate 16 keys
+
   	generate_keys(key); 
 
 	#ifdef DECRYPT
