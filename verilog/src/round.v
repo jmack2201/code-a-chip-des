@@ -30,8 +30,7 @@ assign round_right_end = round_left_start ^ feistel_out;
 case (ROUND_NUM%NUM_STAGES_FF)
     0 :  round_ff pipe_ff (.clk(clk),.rstn(rstn),.valid_i(valid_i),.valid_o(valid_o),.round_in({round_left_end,round_right_end}),.round_out(round_64_o));
     default: begin
-        assign round_64_o[63:32] = round_left_end;
-        assign round_64_o[31:0] = round_right_end;
+        assign round_64_o = {round_left_end,round_right_end};
         assign valid_o = valid_i;
     end
 endcase
