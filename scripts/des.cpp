@@ -353,9 +353,9 @@ string DES(){
 
 int main(int argc, char *argv[]){ 
 	// A 64 bit key
-	string key= convertHexadecimalToBinary(argv[1]);
+	string key= convertHexadecimalToBinary(argv[2]);
 	// A block of plain text of 64 bits
-	pt= convertHexadecimalToBinary(argv[2]);
+	pt= convertHexadecimalToBinary(argv[1]);
 	// Calling the function to generate 16 keys
 
   	generate_keys(key); 
