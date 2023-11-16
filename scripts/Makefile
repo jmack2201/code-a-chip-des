@@ -4,7 +4,7 @@ tb_source=../verilog/tb/
 cpp_object_name=des
 plain_text=85E813540F0AB405
 cipher_key=133457799BBCDFF1
-encrypt_decrypt=Encryption
+encrypt_decrypt=Decryption
 debug=true
 
 .DEFAULT: verilog
@@ -14,11 +14,11 @@ verilog:
 	make verilog_simulate
 
 verilog_compile:
-	iverilog -o $(design_name) -g2005 -Wall -v -c design_setting.txt  | tee $(design_name)_compile.log
+	iverilog -o $(design_name) -g2005 -Wall -Wno-timescale -c design_setting.txt 
 
 verilog_simulate:
 	vvp $(design_name) +test_name=user_input +user_plain_text=$(plain_text) +user_cipher_key=$(cipher_key) \
-	+clk_period=5 +encrypt_decrypt=$(encrypt_decrypt) | tee $(design_name)_verilog_PT:$(plain_text)_KEY:$(cipher_key)_execute.log
+	+clk_period=5 +encrypt_decrypt=$(encrypt_decrypt)
 #	gtkwave $(design_name).vcd --save=$(design_name)_gtkwave_setup.gtkw &
 
 cpp_flow:
