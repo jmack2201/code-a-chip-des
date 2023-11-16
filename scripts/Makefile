@@ -5,6 +5,7 @@ cpp_object_name=des
 plain_text=85E813540F0AB405
 cipher_key=133457799BBCDFF1
 encrypt_decrypt="Decryption"
+debug=false
 
 .DEFAULT: verilog
 verilog:
@@ -25,24 +26,24 @@ cpp_flow:
 	make cpp
 	make cpp_run
 
-cpp_decrypt_flow:
-	make cpp_decrypt
-	make cpp_run
-
 cpp_run:
 	./$(cpp_object_name) $(plain_text) $(cipher_key)
 
 cpp:
-	g++ des.cpp -o $(cpp_object_name)
+ifeq ($(debug),true)
+	ifeq ($(encrypt_decrypt),"Decryption")
+		g++ des.cpp -o -DDEBUG $(cpp_object_name)
+	else
+		g++ des.cpp -o -DDEBUG -DDECRYPT $(cpp_object_name) 
+	endif
+else
+	ifeq ($(encrypt_decrypt),"Decryption")
+		g++ des.cpp -o -DDECRYPT $(cpp_object_name) 
+	else
+		g++ des.cpp -o $(cpp_object_name)
+	endif
+endif
 
-cpp_debug:
-	g++ des.cpp -o -DDEBUG $(cpp_object_name)
-
-cpp_decrypt:
-	g++ des.cpp -o $(cpp_object_name) -DDECRYPT
-
-cpp_decrypt_debug:
-	g++ des.cpp -o $(cpp_object_name) -DDEBUG -DDECRYPT
 clean:
 	rm -rf *.v
 	rm -rf *.vcd
