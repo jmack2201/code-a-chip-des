@@ -44,7 +44,7 @@ module tb_des_top ();
             default: reset();
         endcase
         $monitor("====================================================\nTime: %d\nCLK: %d\tCipher Text: 64x%h Valid: %d",$time,clk,cipher_text,valid_out);
-        #50 $finish;
+        #250 $finish;
     end
     `include "des_top_tasks.v"
 endmodule
