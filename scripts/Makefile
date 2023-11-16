@@ -31,13 +31,13 @@ cpp_run:
 cpp:
     ifeq ($(debug),false)
         ifeq ($(encrypt_decrypt),Decryption)
-		g++ $(cpp_object_name).cpp -o -DDEBUG -DDECRYPT $(cpp_object_name) 
+		g++ $(cpp_object_name).cpp -DDEBUG -DDECRYPT -o $(cpp_object_name) 
         else
-		g++ $(cpp_object_name).cpp -o -DDEBUG $(cpp_object_name)
+		g++ $(cpp_object_name).cpp -DDEBUG -o $(cpp_object_name)
         endif
     else
         ifeq ($(encrypt_decrypt),Decryption)
-		g++ $(cpp_object_name).cpp -o -DDECRYPT $(cpp_object_name) 
+		g++ $(cpp_object_name).cpp -DDECRYPT -o $(cpp_object_name) 
         else
 		g++ $(cpp_object_name).cpp -o $(cpp_object_name)
         endif

@@ -364,7 +364,7 @@ int main(int argc, char *argv[]){
 		reverseKeys();
 	#endif
 
-    cout<<"Plain text: "<<convertBinaryToHexadecimal(pt)<<endl; 
+    cout<<"Plain Text: "<<convertBinaryToHexadecimal(pt)<<endl; 
 	cout<<"Cipher Key: " <<convertBinaryToHexadecimal(key)<<endl;
 	#ifdef DEBUG
 		for (int i = 0; i < 16; i++){
@@ -373,5 +373,5 @@ int main(int argc, char *argv[]){
 	#endif
 	// Applying the algo
     string ct= DES(); 
-    cout<<"Ciphertext: "<<convertBinaryToHexadecimal(ct)<<endl;
+    cout<<"Cipher Text: "<<convertBinaryToHexadecimal(ct)<<endl;
 } 
