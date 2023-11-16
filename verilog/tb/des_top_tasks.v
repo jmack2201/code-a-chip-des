@@ -33,6 +33,6 @@ task display_inputs;
         $display("Inputs to DES:");
         $display("\tPlain Text: 64x%h",plain_text);
         $display("\tCipher Key: 64x%h",cipher_key);
-        $display("\tEncrypt/Decrypt: %d",encrypt_decrypt);
+        $display("\tOperation: %s",test_str);
     end
 endtask

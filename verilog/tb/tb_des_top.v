@@ -16,7 +16,7 @@ module tb_des_top ();
     parameter duty_cycle = 0.5;
 
     reg [8*1000:0] testname;
-    reg [8*1000:0] test_str;
+    reg [8*10:0] test_str;
 
     integer check;
 
@@ -37,7 +37,6 @@ module tb_des_top ();
         check = $value$plusargs("clk_period=%f",clk_period);
         check = $value$plusargs("user_plain_text=%h",user_plain_text);
         check = $value$plusargs("user_cipher_key=%h",user_cipher_key);
-        check = $value$plusargs("encrypt_decrypt=%b",encrypt_decrypt);
         check = $value$plusargs("encrypt_decrypt=%s",test_str);
         if (test_str  == "Encryption") begin
             encrypt_decrypt = 0;
@@ -50,7 +49,7 @@ module tb_des_top ();
             "reset" : reset();
             default: reset();
         endcase
-        $monitor("====================================================\nTime: %d\nCLK: %d\tCipher Text: 64x%h Valid: %d",$time,clk,cipher_text,valid_out);
+        $monitor("===================================================================\nTime: %d\nCLK: %d\tRSTn: %d\tCipher Text: %h\tValid: %d",$time,clk,rstn,cipher_text,valid_out);
         #250 $finish;
     end
     `include "des_top_tasks.v"
