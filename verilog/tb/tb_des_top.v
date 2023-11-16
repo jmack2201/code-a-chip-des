@@ -16,6 +16,7 @@ module tb_des_top ();
     parameter duty_cycle = 0.5;
 
     reg [8*1000:0] testname;
+    reg [8*1000:0] test_str;
 
     integer check;
 
@@ -37,6 +38,12 @@ module tb_des_top ();
         check = $value$plusargs("user_plain_text=%h",user_plain_text);
         check = $value$plusargs("user_cipher_key=%h",user_cipher_key);
         check = $value$plusargs("encrypt_decrypt=%b",encrypt_decrypt);
+        check = $value$plusargs("encrypt_decrypt=%s",test_str);
+        if (test_str  == "Encryption") begin
+            encrypt_decrypt = 0;
+        end else begin
+            encrypt_decrypt = 1;
+        end
 
         case (testname)
             "user_input" : user_input(user_plain_text,user_cipher_key);
