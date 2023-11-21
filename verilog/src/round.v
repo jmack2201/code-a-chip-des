@@ -1,6 +1,6 @@
 module round  #(
     parameter ROUND_NUM=0,
-    parameter NUM_STAGES_FF=4
+    parameter NUM_STAGES_FF=0
 ) (
     input [63:0] round_64_i,
     input [47:0] round_key,
@@ -34,10 +34,4 @@ case (ROUND_NUM%NUM_STAGES_FF)
         assign valid_o = valid_i;
     end
 endcase
-
-
-//puting left and right together for the output
-//assign round_64_o[63:32] = round_left_end;
-//assign round_64_o[31:0] = round_right_end;
-
 endmodule

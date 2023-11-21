@@ -1,3 +1,4 @@
+des_config.v
 feistel_function.v
 final_perm.v
 init_perm.v

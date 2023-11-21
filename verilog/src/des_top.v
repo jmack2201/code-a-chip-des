@@ -1,5 +1,5 @@
 `include "des_config.v"
-module des_top(
+module des_top (
     input [63:0] plain_text, //input plain text
     input [63:0] cipher_key, //assumes parity bits are not dropped
     input clk,rstn,valid_in,encrypt_decrypt, //whether 0 for encryption and 1 for decryption
@@ -13,6 +13,8 @@ module des_top(
 
     reg valid_in_round_stack;
     wire valid_out_round_stack;
+
+    parameter NUM_STAGES_FF = `NUM_ROUND_STAGES;
 
     //Input and Output Flop for Valid, Plain and Cipher Text
     always @(posedge clk ) begin
@@ -35,7 +37,7 @@ module des_top(
 
     key_gen key_gen(.init_key(cipher_key), .round_keys(round_keys_output), .encrypt_decrypt(encrypt_decrypt));
 
-    round_stack #(.NUM_STAGES_FF(4)) round_stack (.init_perm_plain_text(init_perm_out), .round_keys(round_keys_output), .clk(clk), .rstn(rstn),.valid_in(valid_in_round_stack),.valid_out(valid_out_round_stack), .plain_text_final_perm(final_perm_in));
+    round_stack #(.NUM_STAGES_FF(NUM_STAGES_FF)) round_stack (.init_perm_plain_text(init_perm_out), .round_keys(round_keys_output), .clk(clk), .rstn(rstn),.valid_in(valid_in_round_stack),.valid_out(valid_out_round_stack), .plain_text_final_perm(final_perm_in));
 
     final_perm final_perm (.final_p_box_i(final_perm_in), .final_p_box_o(final_perm_out));
     
