@@ -2,9 +2,9 @@ design_name=des_top
 verilog_source=../verilog/src/
 tb_source=../verilog/tb/
 cpp_object_name=des
-plain_text=85E813540F0AB405
+plain_text=0123456789ABCDEF
 cipher_key=133457799BBCDFF1
-encrypt_decrypt=Decryption
+encrypt_decrypt=Encryption
 debug=true
 
 .DEFAULT: verilog
@@ -18,8 +18,8 @@ verilog_compile:
 
 verilog_simulate:
 	vvp $(design_name) +test_name=user_input +user_plain_text=$(plain_text) +user_cipher_key=$(cipher_key) \
-	+clk_period=5 +encrypt_decrypt=$(encrypt_decrypt)
-#	gtkwave $(design_name).vcd --save=$(design_name)_gtkwave_setup.gtkw &
+	+clk_period=5 +encrypt_decrypt=$(encrypt_decrypt) 
+	gtkwave $(design_name).vcd --save=$(design_name)_gtkwave_setup.gtkw &
 
 cpp_flow:
 	make cpp
@@ -29,7 +29,7 @@ cpp_run:
 	./$(cpp_object_name) $(plain_text) $(cipher_key)
 
 cpp:
-    ifeq ($(debug),false)
+    ifeq ($(debug),true)
         ifeq ($(encrypt_decrypt),Decryption)
 		g++ $(cpp_object_name).cpp -DDEBUG -DDECRYPT -o $(cpp_object_name) 
         else
