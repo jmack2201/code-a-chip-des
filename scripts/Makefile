@@ -19,7 +19,7 @@ verilog_compile:
 verilog_simulate:
 	vvp $(design_name) +test_name=user_input +user_plain_text=$(plain_text) +user_cipher_key=$(cipher_key) \
 	+clk_period=5 +encrypt_decrypt=$(encrypt_decrypt) 
-	gtkwave $(design_name).vcd --save=$(design_name)_gtkwave_setup.gtkw &
+#	gtkwave $(design_name).vcd --save=$(design_name)_gtkwave_setup.gtkw &
 
 cpp_flow:
 	make cpp
