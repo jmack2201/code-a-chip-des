@@ -4,6 +4,7 @@ module s_box_6_4 #(
     input [5:0] s_box_6_4_i,
     output reg [3:0] s_box_6_4_o 
 );
+    //creates the eight different LUTs for the S-Boxes
     //get row and column
     wire [1:0] row;
     wire [3:0] column;

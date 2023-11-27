@@ -3,6 +3,7 @@ module key_mux (
     input [767:0] round_keys_i,
     output reg [767:0] round_keys_o
 );
+    //muxes the key order to go out to the rounds
     integer i;
     always @(*) begin    
         for (i = 0; i < 16; i = i +1) begin

@@ -8,10 +8,8 @@ module round_stack #(
     output [63:0] plain_text_final_perm  //scrambed text going to final permuation
 );
 
-//modules to be created:
-//16 round modules all tied together
+//insantiates 16 round modules and wires them together
 wire [63:0] round_intermediate [0:15];
-//wire [63:0] round_intermediate_ff [0:15];
 wire valid_intermediate [0:15];
 
 genvar i;

@@ -3,8 +3,7 @@ module feistel_function (
     input [31:0] feistel_input,
     output [31:0] feistel_output 
 );
-    //modules to be created:
-    //p box expansion 32-48, s-box 6-4, p box 32-32 
+    //performs feistel function and instantiates submodules
     wire [47:0] fiestel_input_expand;
     p_box_32_48 p_box_32_48 (.p_box_i(feistel_input),.p_box_o(fiestel_input_expand));
 

@@ -2,6 +2,7 @@ module p_box_32_48 (
     input [1:32] p_box_i,
     output [1:48] p_box_o 
 );
+    //expands input to fiestel function to be XORed with sub-key
     assign p_box_o[1] = p_box_i[32];
     assign p_box_o[2] = p_box_i[1];
     assign p_box_o[3] = p_box_i[2];

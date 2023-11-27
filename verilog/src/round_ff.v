@@ -5,6 +5,7 @@ module round_ff (
     output reg valid_o,
     output reg [63:0] round_out
 );
+    //implements a FF for pipelining
     always @(posedge clk ) begin
         if (!rstn) begin
             round_out <= 0;

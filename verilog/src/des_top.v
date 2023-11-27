@@ -31,6 +31,8 @@ module des_top (
         end
     end
 
+    //Instantiates main modules
+
     init_perm init_perm (.init_p_box_i(init_perm_in), .init_p_box_o(init_perm_out));
 
     wire [767:0] round_keys_output;

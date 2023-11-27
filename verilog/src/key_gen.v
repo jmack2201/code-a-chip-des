@@ -3,6 +3,7 @@ module key_gen (
     input encrypt_decrypt,
     output [767:0] round_keys 
 );
+    //higher level module for sub-key generation
     wire [55:0] permutated_key;
 
     p_box_64_56 p_box_64_56(.p_box_64_56_i(init_key),.p_box_64_56_o(permutated_key)); 

@@ -9,6 +9,8 @@ module round  #(
     output [63:0] round_64_o     
 );
 
+//creates feistel function for round operation and FFs if desired
+
 //create left and right
 wire [31:0] round_left_start;
 wire [31:0] round_right_start;
