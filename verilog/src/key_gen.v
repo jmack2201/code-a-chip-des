@@ -1,3 +1,4 @@
+`include "des_config.v"
 module key_gen #(
     parameter NUM_STAGES_FF = 0
 ) (
@@ -19,15 +20,26 @@ module key_gen #(
     wire [767:0] round_keys_mux_out;
     key_mux key_mux(.encrypt_decrypt(encrypt_decrypt), .round_keys_i(round_keys_intermediate_out), .round_keys_o(round_keys_mux_out));
 
-    always @(posedge clk ) begin
-        if (!rstn) begin
-            round_keys <= 0;
-            valid_o <= 0;
-        end else begin
-            round_keys <= round_keys_mux_out;
-            valid_o <= valid_intermediate[15];
+    case (`ROUND_KEY_OUT_FF)
+        1: begin
+            always @(posedge clk ) begin
+                if (!rstn) begin
+                    round_keys <= 0;
+                    valid_o <= 0;
+                end else begin
+                    round_keys <= round_keys_mux_out;
+                    valid_o <= valid_intermediate[15];
+                end
+            end
+            
         end
-    end
+        default: begin
+            always @(*) begin
+                round_keys = round_keys_mux_out;
+                valid_o = valid_intermediate[15];
+            end
+        end
+    endcase
     wire valid_intermediate [0:15];
 
     genvar i;
