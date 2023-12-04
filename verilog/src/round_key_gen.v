@@ -36,12 +36,7 @@ module round_key_gen #(
     
     p_box_56_48 p_box_56_48 (.p_box_56_48_i(input_key_combined),.p_box_56_48_o(round_key_out));
 
-    case (round_num%NUM_STAGES_FF)
-        0 :  key_ff pipe_ff(.clk(clk),.rstn(rstn),.valid_i(valid_i),.valid_o(valid_o),.key_out_ff(key_output),.key_in_ff(input_key_combined));
-        default: begin
-            assign key_output = input_key_combined;
-            assign valid_o = valid_i;
-        end
-    endcase
+    assign key_output = input_key_combined;
+    assign valid_o = valid_i;
 
 endmodule
