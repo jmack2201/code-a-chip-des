@@ -35,6 +35,40 @@ int convertBinaryToDecimal(string binary)
 	}
 	return decimal;
 }
+string convertBinaryToHexadecimal(string binary){
+	string hexDigits = "0123456789ABCDEF";
+    string hexResult = "";
+
+    // Convert each 4-bit chunk to a hexadecimal digit
+    for (size_t i = 0; i < binary.size(); i += 4) {
+        string chunk = binary.substr(i, 4);
+        int decimal = stoi(chunk, nullptr, 2);
+        hexResult += hexDigits[decimal];
+    }
+	return hexResult;
+}
+string convertHexadecimalToBinary(string hex) {
+    // Define a lookup table for hexadecimal to binary conversion
+    string hexDigits = "0123456789ABCDEF";
+    string binaryDigits[] = {"0000", "0001", "0010", "0011",
+                                        "0100", "0101", "0110", "0111",
+                                        "1000", "1001", "1010", "1011",
+                                        "1100", "1101", "1110", "1111"};
+    // Convert each hexadecimal digit to its binary representation
+    string binaryResult;
+    for (char c : hex) {
+        // Find the index of the hexadecimal digit in the lookup table
+        size_t index = hexDigits.find(toupper(c));
+        if (index != string::npos) {
+            binaryResult += binaryDigits[index];
+        } else {
+            // Handle invalid characters in the hexadecimal string
+            cerr << "Error: Invalid hexadecimal character '" << c << "'" << endl;
+            return "";
+        }
+    }
+    return binaryResult;
+}
 // Function to do a circular left shift by 1
 string shift_left_once(string key_chunk){ 
     string shifted="";  
@@ -72,18 +106,6 @@ string Xor(string a, string b){
 	return result; 
 } 
 
-string convertBinaryToHexadecimal(string binary){
-	string hexDigits = "0123456789ABCDEF";
-    string hexResult = "";
-
-    // Convert each 4-bit chunk to a hexadecimal digit
-    for (size_t i = 0; i < binary.size(); i += 4) {
-        string chunk = binary.substr(i, 4);
-        int decimal = stoi(chunk, nullptr, 2);
-        hexResult += hexDigits[decimal];
-    }
-	return hexResult;
-}
 // Function to generate the 16 keys.
 void generate_keys(string key){
 	// The PC1 table
@@ -113,32 +135,68 @@ void generate_keys(string key){
 	for(int i = 0; i < 56; i++){ 
 		perm_key+= key[pc1[i]-1]; 
 	} 
+	#ifdef DEBUG
+		cout << "Key after PC1: " << convertBinaryToHexadecimal(perm_key) << endl;
+	#endif
 	// 2. Dividing the key into two equal halves
 	string left= perm_key.substr(0, 28); 
 	string right= perm_key.substr(28, 28); 
 	for(int i=0; i<16; i++){ 
+		#ifdef DEBUG
+			cout << "Round Number: " << i+1 << endl;
+			cout << "Initial Left: " << convertBinaryToHexadecimal(left) << endl;
+		    cout << "Initial Right: " << convertBinaryToHexadecimal(right) << endl;
+		#endif
 		// 3.1. For rounds 1, 2, 9, 16 the key_chunks
 		// are shifted by one.
 		if(i == 0 || i == 1 || i==8 || i==15 ){
 			left= shift_left_once(left); 
 			right= shift_left_once(right);
+			#ifdef DEBUG
+				cout << "Left After 1 Shift: " << convertBinaryToHexadecimal(left) << endl;
+				cout << "Right After 1 Shift: " << convertBinaryToHexadecimal(right) << endl;
+			#endif
 		} 
 		// 3.2. For other rounds, the key_chunks
 		// are shifted by two
 		else{
 			left= shift_left_twice(left); 
 			right= shift_left_twice(right);
+			#ifdef DEBUG
+				cout << "Left After 2 Shift: " << convertBinaryToHexadecimal(left) << endl;
+				cout << "Right After 2 Shift: " << convertBinaryToHexadecimal(right) << endl;
+			#endif
 		}
 		// Combining the two chunks
 		string combined_key = left + right;
+		#ifdef DEBUG
+			cout << "Round Key after combining: " << convertBinaryToHexadecimal(combined_key) << endl;
+	    #endif
 		string round_key = ""; 
 		// Finally, using the PC2 table to transpose the key bits
 		for(int i = 0; i < 48; i++){ 
 			round_key += combined_key[pc2[i]-1]; 
 		}   
 		round_keys[i] = round_key; 
+		#ifdef DEBUG
+			cout << "Round Key after PC2: " << convertBinaryToHexadecimal(round_key) << endl;
+		#endif 
 	} 
 
+}
+
+void reverseKeys(){
+	// Reversing the round_keys array for decryption
+	int i = 15;
+	int j = 0;
+	while(i > j)
+	{
+		string temp = round_keys[i];
+	    round_keys[i] = round_keys[j];
+		round_keys[j] = temp;
+		i--;
+		j++;
+	}
 }
 // Implementing the algorithm
 string DES(){ 
@@ -235,7 +293,10 @@ string DES(){
   	string perm = ""; 
 	for(int i = 0; i < 64; i++){ 
 		perm += pt[initial_permutation[i]-1]; 
-	}  
+	} 
+	#ifdef DEBUG
+		cout << "After Initial Permuatation: " << convertBinaryToHexadecimal(perm) << endl; 
+	#endif
 	// 2. Dividing the result into two equal halves 
 	string left = perm.substr(0, 32); 
 	string right = perm.substr(32, 32);
@@ -243,14 +304,33 @@ string DES(){
 	for(int i=0; i<16; i++) { 
     	string right_expanded = ""; 
 		// 3.1. The right half of the plain text is expanded
+		#ifdef DEBUG
+			cout << "Round Number: " << i+1<< endl;
+			cout << "Left: " << convertBinaryToHexadecimal(left) << endl;
+			cout << "Right: " << convertBinaryToHexadecimal(right) << endl;
+		#endif
     	for(int i = 0; i < 48; i++) { 
       		right_expanded += right[expansion_table[i]-1]; 
-    };  // 3.3. The result is xored with a key
+    	};  // 3.3. The result is xored with a key
+		#ifdef DEBUG
+			cout << "Right Expansion: " << convertBinaryToHexadecimal(right_expanded) <<endl;
+			cout << "F function key: "<< convertBinaryToHexadecimal(round_keys[i]) << endl;
+		#endif
 		string xored = Xor(round_keys[i], right_expanded);  
 		string res = ""; 
+		#ifdef DEBUG
+			cout << "Result of Key and Right Expanded XOR: " << convertBinaryToHexadecimal(xored) << endl;
+		#endif
 		// 3.4. The result is divided into 8 equal parts and passed 
 		// through 8 substitution boxes. After passing through a 
 		// substituion box, each box is reduces from 6 to 4 bits.
+		#ifdef DEBUG
+			cout << "Result of Key and Right Expanded XOR: " << convertBinaryToHexadecimal(xored) << endl;
+			cout << "Eight 6-bit slices to index S-Boxes:\n";
+			for (int i=0; i < 47; i += 6){
+				cout << xored.substr(i,6) << endl;
+			}
+		#endif
 		for(int i=0;i<8; i++){ 
 			// Finding row and column indices to lookup the
 			// substituition box
@@ -258,16 +338,31 @@ string DES(){
       		int row = convertBinaryToDecimal(row1);
       		string col1 = xored.substr(i*6 + 1,1) + xored.substr(i*6 + 2,1) + xored.substr(i*6 + 3,1) + xored.substr(i*6 + 4,1);;
 			int col = convertBinaryToDecimal(col1);
+			#ifdef DEBUG
+				cout << "S-Box " << i << ": Row " << convertBinaryToHexadecimal(convertDecimalToBinary(row)) << " Column " << convertBinaryToHexadecimal(convertDecimalToBinary(col)) <<endl;
+			#endif
 			int val = substition_boxes[i][row][col];
+			#ifdef DEBUG
+				cout << "S-Box " << i << " Output: " << convertBinaryToHexadecimal(convertDecimalToBinary(val)) << endl;
+			#endif
 			res += convertDecimalToBinary(val);  
 		} 
 		// 3.5. Another permutation is applied
+		#ifdef DEBUG
+			cout << "After SBOX subsititution: " << convertBinaryToHexadecimal(res) << endl;
+		#endif
 		string perm2 =""; 
 		for(int i = 0; i < 32; i++){ 
 			perm2 += res[permutation_tab[i]-1]; 
 		}
+		#ifdef DEBUG
+			cout << "After permutation, F function output of Round " << i+1<< ": "<< convertBinaryToHexadecimal(perm2) << endl;
+		#endif
 		// 3.6. The result is xored with the left half
 		xored = Xor(perm2, left);
+		#ifdef DEBUG
+			cout << "Result of F function output and Left half XOR: " << convertBinaryToHexadecimal(xored) << endl;
+		#endif
 		// 3.7. The left and the right parts of the plain text are swapped 
 		left = xored; 
 		if(i < 15){ 
@@ -275,9 +370,16 @@ string DES(){
 			right = xored;
 			left = temp;
 		} 
+		#ifdef DEBUG
+			cout << "Final left: " << convertBinaryToHexadecimal(left) << endl; 
+			cout << "Final right: " << convertBinaryToHexadecimal(right) << endl; 
+		#endif
 	} 
 	// 4. The halves of the plain text are applied
-	string combined_text = left + right;   
+	string combined_text = left + right;
+	#ifdef DEBUG
+		cout << "Combined output before inverse permutation: " << convertBinaryToHexadecimal(combined_text) << endl; 
+	#endif   
 	string ciphertext =""; 
 	// The inverse of the initial permuttaion is applied
 	for(int i = 0; i < 64; i++){ 
@@ -286,34 +388,28 @@ string DES(){
 	//And we finally get the cipher text
 	return ciphertext; 
 }
-int main(){ 
+
+int main(int argc, char *argv[]){ 
 	// A 64 bit key
-	string key= "0001001100110100010101110111100110011011101111001101111111110001";
+	string key= convertHexadecimalToBinary(argv[2]);
 	// A block of plain text of 64 bits
-	pt= "0000000100100011010001010110011110001001101010111100110111101111";
+	pt= convertHexadecimalToBinary(argv[1]);
 	// Calling the function to generate 16 keys
-	string apt = pt;
+
   	generate_keys(key); 
-    cout<<"Plain text: "<<convertBinaryToHexadecimal(pt)<<endl; 
+
+	#ifdef DECRYPT
+		reverseKeys();
+	#endif
+
+    cout<<"Plain Text: "<<convertBinaryToHexadecimal(pt)<<endl; 
+	cout<<"Cipher Key: " <<convertBinaryToHexadecimal(key)<<endl;
+	#ifdef DEBUG
+		for (int i = 0; i < 16; i++){
+			cout << "Key " << i+1 << ": " << convertBinaryToHexadecimal(round_keys[i]) << endl;
+		}
+	#endif
 	// Applying the algo
     string ct= DES(); 
-    cout<<"Ciphertext: "<<convertBinaryToHexadecimal(ct)<<endl;
-	// Reversing the round_keys array for decryption
-	int i = 15;
-	int j = 0;
-	while(i > j)
-	{
-		string temp = round_keys[i];
-		round_keys[i] = round_keys[j];
-		round_keys[j] = temp;
-		i--;
-		j++;
-	}
-	pt = ct;
-	string decrypted = DES();
-	cout<<"Decrypted text:"<<convertBinaryToHexadecimal(decrypted)<<endl;
-	// Comapring the initial plain text with the decrypted text
-	if (decrypted == apt){
-		cout<<"Plain text encrypted and decrypted successfully."<<endl;
-	}
+    cout<<"Cipher Text: "<<convertBinaryToHexadecimal(ct)<<endl;
 } 

@@ -2,6 +2,7 @@ module final_perm (
     input [1:64] final_p_box_i,
     output [1:64] final_p_box_o 
 );
+    //performs final permutation
     assign final_p_box_o[1] = final_p_box_i[40];
     assign final_p_box_o[2] = final_p_box_i[8];
     assign final_p_box_o[3] = final_p_box_i[48];

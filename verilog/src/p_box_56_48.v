@@ -2,6 +2,7 @@ module p_box_56_48 (
     input [1:56] p_box_56_48_i,
     output [1:48] p_box_56_48_o 
 );
+    //compresses the key before sending it to the round
     assign p_box_56_48_o[1] = p_box_56_48_i[14];
     assign p_box_56_48_o[2] = p_box_56_48_i[17];
     assign p_box_56_48_o[3] = p_box_56_48_i[11];

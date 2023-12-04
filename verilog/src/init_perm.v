@@ -2,6 +2,7 @@ module init_perm (
     input [1:64] init_p_box_i,
     output [1:64] init_p_box_o 
 );
+    //performs initial permutation
     assign init_p_box_o[1] = init_p_box_i[58];
     assign init_p_box_o[2] = init_p_box_i[50];
     assign init_p_box_o[3] = init_p_box_i[42];

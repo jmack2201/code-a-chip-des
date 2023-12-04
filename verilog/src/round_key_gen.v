@@ -6,6 +6,7 @@ module round_key_gen #(
     output [55:0] key_output 
 );
 
+    //performs circular left shift and instantiates key compression box
     reg [27:0] input_key_left_shifted;
     reg [27:0] input_key_right_shifted;
     reg [55:0] input_key_combined;

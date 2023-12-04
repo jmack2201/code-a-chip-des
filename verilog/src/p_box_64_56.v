@@ -2,6 +2,7 @@ module p_box_64_56 (
     input [1:64] p_box_64_56_i,
     output [1:56] p_box_64_56_o 
 );
+    //compresses the key before creating sub-keys
     assign p_box_64_56_o[1] = p_box_64_56_i[57];
     assign p_box_64_56_o[2] = p_box_64_56_i[49];
     assign p_box_64_56_o[3] = p_box_64_56_i[41];

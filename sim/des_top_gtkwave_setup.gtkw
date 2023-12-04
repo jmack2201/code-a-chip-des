@@ -1,23 +1,32 @@
 [*]
 [*] GTKWave Analyzer v3.3.114 (w)1999-2023 BSI
-[*] Sun Nov  5 21:08:55 2023
+[*] Mon Nov 13 05:50:37 2023
 [*]
 [dumpfile] "/home/jmack2201/code-a-chip-des/sim/des_top.vcd"
-[dumpfile_mtime] "Sun Nov  5 21:08:00 2023"
-[dumpfile_size] 99540
+[dumpfile_mtime] "Mon Nov 13 05:49:51 2023"
+[dumpfile_size] 152157
 [savefile] "/home/jmack2201/code-a-chip-des/sim/des_top_gtkwave_setup.gtkw"
 [timestart] 0
-[size] 1000 600
-[pos] -1 -1
-*0.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
-[sst_width] 192
-[signals_width] 132
+[size] 1000 551
+[pos] 333 326
+*-15.423918 58900 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_des_top.
+[treeopen] tb_des_top.des_top.
+[treeopen] tb_des_top.des_top.round_stack.
+[treeopen] tb_des_top.des_top.round_stack.gen_round_stage[0].
+[treeopen] tb_des_top.des_top.round_stack.gen_round_stage[0].genblk2.
+[sst_width] 280
+[signals_width] 304
 [sst_expanded] 1
-[sst_vpaned_height] 157
+[sst_vpaned_height] 140
 @820
 tb_des_top.testname[8000:0]
 @28
 tb_des_top.clk
+tb_des_top.des_top.rstn
+tb_des_top.des_top.encrypt_decrypt
+tb_des_top.des_top.valid_in
+tb_des_top.des_top.valid_out
 @22
 tb_des_top.plain_text[63:0]
 tb_des_top.cipher_key[63:0]

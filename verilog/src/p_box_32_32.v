@@ -2,6 +2,7 @@ module p_box_32_32 (
     input [1:32] p_box_32_32_i,
     output [1:32] p_box_32_32_o 
 );
+    //performs permutation after S-Box substitution
     assign p_box_32_32_o[1] = p_box_32_32_i[16];
     assign p_box_32_32_o[2] = p_box_32_32_i[7];
     assign p_box_32_32_o[3] = p_box_32_32_i[20];
