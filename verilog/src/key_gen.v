@@ -32,7 +32,7 @@ module key_gen (
             
         end
         default: begin
-            always @(*) begin
+            always @(valid_intermediate[15],round_keys_mux_out) begin
                 round_keys = round_keys_mux_out;
                 valid_o = valid_intermediate[15];
             end
