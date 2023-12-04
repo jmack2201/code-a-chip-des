@@ -1,9 +1,8 @@
 module round_key_gen #(
-    parameter round_num=0,
-    parameter NUM_STAGES_FF=0
-) (
+    parameter round_num=0
+    ) (
     input [55:0] key_input,
-    input clk,rstn,valid_i,
+    input valid_i,
     output valid_o,
     output [47:0] round_key_out, 
     output [55:0] key_output 

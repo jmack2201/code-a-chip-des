@@ -1,7 +1,5 @@
 `include "des_config.v"
-module key_gen #(
-    parameter NUM_STAGES_FF = 0
-) (
+module key_gen (
     input [63:0] init_key,
     input encrypt_decrypt,
     input clk,rstn,valid_i,
@@ -46,9 +44,9 @@ module key_gen #(
     generate
         for (i = 0; i < 16 ; i=i+1 ) begin : gen_round_key
             if (i == 0) begin
-                round_key_gen #(.round_num(i+1),.NUM_STAGES_FF(NUM_STAGES_FF)) round_key_gen_stage (.clk(clk),.rstn(rstn),.valid_i(valid_i),.valid_o(valid_intermediate[i]),.key_input(permutated_key), .key_output(key_gen_intermediate[i]), .round_key_out(round_keys_intermediate_out[767-48*i:720-48*i]));
+                round_key_gen #(.round_num(i+1)) round_key_gen_stage (.valid_i(valid_i),.valid_o(valid_intermediate[i]),.key_input(permutated_key), .key_output(key_gen_intermediate[i]), .round_key_out(round_keys_intermediate_out[767-48*i:720-48*i]));
             end else begin
-                round_key_gen #(.round_num(i+1),.NUM_STAGES_FF(NUM_STAGES_FF)) round_key_gen_stage (.clk(clk),.rstn(rstn),.valid_i(valid_intermediate[i-1]),.valid_o(valid_intermediate[i]),.key_input(key_gen_intermediate[i-1]), .key_output(key_gen_intermediate[i]), .round_key_out(round_keys_intermediate_out[767-48*i:720-48*i]));    
+                round_key_gen #(.round_num(i+1)) round_key_gen_stage (.valid_i(valid_intermediate[i-1]),.valid_o(valid_intermediate[i]),.key_input(key_gen_intermediate[i-1]), .key_output(key_gen_intermediate[i]), .round_key_out(round_keys_intermediate_out[767-48*i:720-48*i]));    
             end
         end
     endgenerate

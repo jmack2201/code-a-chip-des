@@ -38,7 +38,7 @@ module des_top (
 
     init_perm init_perm (.init_p_box_i(init_perm_in), .init_p_box_o(init_perm_out));
 
-    key_gen #(.NUM_STAGES_FF(`NUM_KEY_STAGES_FF)) key_gen(.clk(clk),.rstn(rstn),.valid_i(valid_i),.valid_o(valid_o_key),.init_key(cipher_key_in), .round_keys(round_keys_output), .encrypt_decrypt(encrypt_decrypt));
+    key_gen key_gen(.clk(clk),.rstn(rstn),.valid_i(valid_i),.valid_o(valid_o_key),.init_key(cipher_key_in), .round_keys(round_keys_output), .encrypt_decrypt(encrypt_decrypt));
 
     round_stack #(.NUM_STAGES_FF(`NUM_ROUND_STAGES_FF)) round_stack (.init_perm_plain_text(init_perm_out), .round_keys(round_keys_output), .clk(clk), .rstn(rstn),.valid_in(valid_o_key),.valid_out(valid_out_round_stack), .plain_text_final_perm(final_perm_in));
 
