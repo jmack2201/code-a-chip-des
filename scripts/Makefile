@@ -6,6 +6,7 @@ plain_text=0123456789ABCDEF
 cipher_key=133457799BBCDFF1
 encrypt_decrypt=Encryption
 debug=false
+test_name=single_input
 
 .DEFAULT: verilog
 verilog:
@@ -17,7 +18,7 @@ verilog_compile:
 	iverilog -o $(design_name) -g2005 -Wall -Wno-timescale -c design_setting.txt 
 
 verilog_simulate:
-	vvp $(design_name) +test_name=single_input +user_plain_text=$(plain_text) +user_cipher_key=$(cipher_key) \
+	vvp $(design_name) +test_name=$(test_name) +user_plain_text=$(plain_text) +user_cipher_key=$(cipher_key) \
 	+clk_period=5 +encrypt_decrypt=$(encrypt_decrypt) 
 #	gtkwave $(design_name).vcd --save=$(design_name)_gtkwave_setup.gtkw &
 

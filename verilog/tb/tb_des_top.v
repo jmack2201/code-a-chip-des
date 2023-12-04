@@ -46,7 +46,7 @@ module tb_des_top ();
 
         case (testname)
             "single_input" : single_input(user_plain_text,user_cipher_key,encrypt_decrypt);
-            "pipeline" : pipeline(user_plain_text,user_cipher_key,encrypt_decrypt);
+            "multiple_inputs" : multiple_inputs(user_plain_text,user_cipher_key,encrypt_decrypt);
             "reset" : reset();
             default: reset();
         endcase

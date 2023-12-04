@@ -48,13 +48,14 @@ task send_inputs;
     end
 endtask
 
-task pipeline;
+task multiple_inputs;
     input [63:0] plain_text_input;
     input [63:0] cipher_key_input;
     input encrypt_decrypt_input;
     begin
         reset();
         send_inputs(plain_text_input,cipher_key_input,encrypt_decrypt_input);
+        @(posedge valid_out);
         send_inputs(64'h85E813540F0AB405,cipher_key_input,1);
     end
 endtask
