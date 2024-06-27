@@ -5,19 +5,20 @@ cpp_object_name=des
 plain_text=0123456789ABCDEF
 cipher_key=133457799BBCDFF1
 encrypt_decrypt=Encryption
-debug=true
+debug=false
+test_name=single_input
 
 .DEFAULT: verilog
 verilog:
-	make verilog_link
 	make verilog_compile
 	make verilog_simulate
 
 verilog_compile:
+	make verilog_link
 	iverilog -o $(design_name) -g2005 -Wall -Wno-timescale -c design_setting.txt 
 
 verilog_simulate:
-	vvp $(design_name) +test_name=user_input +user_plain_text=$(plain_text) +user_cipher_key=$(cipher_key) \
+	vvp $(design_name) +test_name=$(test_name) +user_plain_text=$(plain_text) +user_cipher_key=$(cipher_key) \
 	+clk_period=5 +encrypt_decrypt=$(encrypt_decrypt) 
 #	gtkwave $(design_name).vcd --save=$(design_name)_gtkwave_setup.gtkw &
 
