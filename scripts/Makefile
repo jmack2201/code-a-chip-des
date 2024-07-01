@@ -7,6 +7,8 @@ cipher_key=133457799BBCDFF1
 encrypt_decrypt=Encryption
 debug=false
 test_name=single_input
+openlane_dir=/home/jmack/openlane2/
+script_path=/home/jmack/silicon_projects/code-a-chip-des/scripts
 
 .DEFAULT: verilog
 verilog:
@@ -43,6 +45,9 @@ cpp:
 		g++ $(cpp_object_name).cpp -o $(cpp_object_name)
         endif
     endif
+
+pd:
+	cd $(openlane_dir); nix-shell --command "python3 $(script_path)/pd.py"
 
 clean:
 	rm -rf *.v
